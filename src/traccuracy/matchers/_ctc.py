@@ -59,8 +59,8 @@ class CTCMatched(Matched):
         ):
             gt_frame = mask_gt[i]
             pred_frame = mask_pred[i]
-            gt_frame_nodes = gt.tracking_graph.nodes_by_frame[t]
-            pred_frame_nodes = pred.tracking_graph.nodes_by_frame[t]
+            gt_frame_nodes = gt.tracking_graph.nodes_by_frame.get(t, [])
+            pred_frame_nodes = pred.tracking_graph.nodes_by_frame.get(t, [])
 
             # get the labels for this frame
             gt_labels = dict(

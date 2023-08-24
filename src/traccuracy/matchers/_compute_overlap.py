@@ -47,6 +47,12 @@ def get_labels_with_overlap(gt_frame, res_frame):
         [int(res_prop.label) for res_prop in res_props], dtype=np.uint16
     )
 
+    # make numba deal with empty arrays
+    if len(gt_boxes) == 0:
+        gt_boxes = np.zeros((0, 4))
+    if len(res_boxes) == 0:
+        res_boxes = np.zeros((0, 4))
+
     if gt_frame.ndim == 3:
         overlaps = compute_overlap_3D(gt_boxes, res_boxes)
     else:
